@@ -1,0 +1,16 @@
+{% extends 'core/plantilla.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block contenido %}
+{% if not user.is_staff %}
+<h5>Usted no es admin</h5>
+<a href="{% url 'home' %}"></a>
+{% else %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+{{mensaje}}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'core/plantilla.html' %}
+{% load static %}
+{% block contenido %}
+
+
+<h5>Listado de vehículos</h5>
+<table class="table table-hover">
+    <tr>
+        <th>Patente</th>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Categoria</th>
+        <th>estado</th>
+        {% if user.is_staff %}
+        <th>Editar</th>
+        <th>Eliminar</th>
+        {% endif %}
+    </tr>
+    {% for i in vehiculos %}
+    <tr>
+        <td>{{i.patente}}</td>
+        <td>{{i.marca}}</td>
+        <td>{{i.modelo}}</td>
+        <td>{{i.categoria}}</td>
+        <td>{{i.estado}}</td>
+        {% if user.is_staff %}
+        <td>
+            <a href="{% url 'modificarVehiculo' i.patente %}">Modificar</a>
+        </td>
+        <td>
+            <a href="{% url 'eliminarVehiculo' i.patente %}">Eliminar</a>
+        </td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}
